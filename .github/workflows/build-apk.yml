@@ -26,8 +26,9 @@ jobs:
       - name: Install Android SDK
         run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
 
-      - name: Build APK
+      - name: Build launcher
         run: |
+          cd launcher
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon
 
@@ -35,5 +36,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: glassOS-tv-APK
-          path: app/build/outputs/apk/release/*.apk
+          path: launcher/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
